@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Sprawdź zamówienie{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Zawartość Twojego koszyka:</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Numer w koszyku</th>
+                        <th>Nazwa produktu</th>
+                        <th>Cena</th>
+                        <th>Ilość</th>
+                        <th>Suma</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cp in cart.cartproduct_set.all %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ cp.product.title }}</td>
+                        <td>{{ cp.price }} PLN</td>
+                        <td>{{ cp.quantity }}</td>
+                        <td>{{ cp.subtotal }} PLN</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan = "4" class="text">Do zapłaty:</th>
+                        <th>{{ cart.total }} PLN</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h3>Złóż zamówienie:</h3>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button>Złóż zamówienie</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

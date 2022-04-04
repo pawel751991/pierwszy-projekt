@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{{ product.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3>{{ product.title }}</h3><hr>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ product.image.url }}" alt="" class=img-fluid">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h4>Nazwa: {{ product.title }}</h4>
+        <h5>Kategoria: {{ product.category }}</h5>
+        <h5>Cena: {{ product.price }} PLN</h5>
+        <hr>
+        <a href="{% url 'addtocart' product.id %}" class="btn btn-info">Dodaj do koszyka</a>
+        <hr>
+        <p>{{ product.description }}</p>
+    </div>
+
+</div>
+{% endblock %}

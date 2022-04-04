@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Mój koszyk{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h4>Przedmioty w Twoim koszyku:</h4><hr>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Numer w koszyku</th>
+                        <th>Nazwa produktu</th>
+                        <th>Cena</th>
+                        <th>Ilość</th>
+                        <th>Suma</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cp in cart.cartproduct_set.all %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ cp.product.title }}</td>
+                        <td>{{ cp.price }} PLN</td>
+                        <td>{{ cp.quantity }}</td>
+                        <td>{{ cp.subtotal }} PLN</td>
+                        <td>
+                            <a href="{% url 'managecart' cp.id %}?action=inc"> Dodaj </a>
+                            <a href="{% url 'managecart' cp.id %}?action=dcr"> Usuń </a>
+                            <a href="{% url 'managecart' cp.id %}?action=rmv"> Usuń wszystkie </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="4" class="text">Do zapłaty:</th>
+                        <th>{{ cart.total }} PLN</th>
+                    </tr>
+                    <tr>
+                        <th><a href="{% url 'checkout' %}">Złóż zamówienie</a></th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

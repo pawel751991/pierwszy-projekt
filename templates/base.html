@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <a href="/">Strona główna</a> |
+    <a href="/all-categories/">Kategorie</a> |
+    <a href="/about/">O nas</a> |
+    <a href="/contact-us/">Kontakt</a> |
+    <a href="/my-cart/">Mój koszyk</a> |
+
+    {% if request.user.client %}
+    <a href="/orderhistory/">Moje zamówienie</a> |
+    <a href="/logout/">Wyloguj</a> |
+    Witaj {{ request.user.username }}!
+    {% else %}
+    <a href="/register/">Rejestracja</a> |
+    <a href="/login/">Logowanie</a>
+    {% endif %}
+    <hr>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
